@@ -22,6 +22,7 @@
         <spring.boot.starter.data.redis.version>1.5.19.RELEASE</spring.boot.starter.data.redis.version>
         <mybatis.srping.boor.starter.version>2.0.0</mybatis.srping.boor.starter.version>
         <netty.version>4.1.33.Final</netty.version>
+        <io.protostuff.version>1.6.0</io.protostuff.version>
     </properties>
 
     <dependencies>
@@ -39,6 +40,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -106,6 +113,29 @@
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
         </dependency>
+
+        <!--ProtoStuff-->
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-api</artifactId>
+            <version>${io.protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${io.protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${io.protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-collectionschema</artifactId>
+            <version>${io.protostuff.version}</version>
+        </dependency>
+
 
     </dependencies>
 

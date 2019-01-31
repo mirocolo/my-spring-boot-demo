@@ -3,10 +3,12 @@ package com.loovee.doll.springboot.demo.config.web;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.loovee.doll.springboot.demo.config.web.filter.SecurityFilter;
 import com.loovee.doll.springboot.demo.config.web.iterator.ParamIterator;
 
 import org.apache.catalina.filters.RemoteIpFilter;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -28,11 +30,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport{
+public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	/**
-	 * 使用fastjson序列化返回的http消息
-	 * @return
+	 * 使用FastJson序列化返回的http消息
 	 */
 	@Bean
 	public HttpMessageConverters fastJsonHttpMessageConverters() {
@@ -66,12 +67,33 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 	}
 
 	@Bean
-	public ParamIterator paramIterator(){
+	public SecurityFilter initSecurityFilter() {
+		return new SecurityFilter();
+	}
+
+	/**
+	 * 注入过滤器链
+	 * @return
+	 */
+	@Bean
+	public FilterRegistrationBean securityFilter() {
+		FilterRegistrationBean<SecurityFilter> register = new FilterRegistrationBean<>();
+		register.setFilter(initSecurityFilter());
+		register.addUrlPatterns("/api/crm/*");
+		register.addInitParameter("securityKey", "securityVal");
+		register.setName("SecurityFilter");
+		register.setOrder(1);
+		return register;
+	}
+
+	@Bean
+	public ParamIterator paramIterator() {
 		return new ParamIterator();
 	}
 
 	/**
 	 * 注入系统内实现的拦截器类
+	 *
 	 * @param registry 拦截器注册类
 	 */
 	@Override

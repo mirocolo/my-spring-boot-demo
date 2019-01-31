@@ -39,6 +39,19 @@ spring:
 logging:
   path: /var/www/apps/doll-midserver/logs
 
+netty:
+  config:
+    port: 8990
+    boss:
+      thread:
+        count: 2
+    worker:
+      thread:
+        count: 2
+    so:
+      keepalive: true
+      backlog: 128
+      nodelay: true
 
 crm:
   api:
