@@ -1,0 +1,47 @@
+spring:
+  #数据库连接配置 配置druid连接
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://192.168.20.136:3306?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
+      username: mypmlive
+      password: 23985111@Loovee
+      #配置初始化大小/最小/最大
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  #redis连接
+  redis:
+    database: 0
+    host: 192.168.20.136
+    port: 8335
+    jedis:
+      pool:
+        max-active: 2000
+        max-idle: 500
+        max-wait: 10000
+    timeout: 10000
+
+logging:
+  path: /var/www/apps/doll-midserver/logs
+
+
+crm:
+  api:
+    whiteips: 127.0.0.1,192.168.20.136,192.168.20.146
+  request:
+    secret: "',g-w)T=;c!>6<5A3t8/x@4CeWN*Hqa"

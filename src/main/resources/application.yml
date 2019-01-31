@@ -1,0 +1,22 @@
+#端口
+server:
+  port: 8082
+#指定logback配置文件
+logging:
+  config: classpath:logback-boot.xml
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.loovee.doll.springboot.demo.bean
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  #指定环境配置
+  profiles:
+    active: test
+
+
+
+
+
